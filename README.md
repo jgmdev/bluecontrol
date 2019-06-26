@@ -72,4 +72,5 @@ make DESTDIR=/packages/bluecontrol/tree install
 ![settings](https://raw.githubusercontent.com/jgmdev/bluecontrol/master/screenshots/settings.png)
 
 ### Compact
-![overview](https://raw.githubusercontent.com/jgmdev/bluecontrol/master/screenshots/compact.png)
+![compact](https://raw.githubusercontent.com/jgmdev/bluecontrol/master/screenshots/compact.png)
+![compact settings](https://raw.githubusercontent.com/jgmdev/bluecontrol/master/screenshots/compact-settings.png)
