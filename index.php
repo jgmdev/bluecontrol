@@ -221,7 +221,7 @@ $(document).ready(function(){
             <a 
                 class="logo" 
                 title="Blue Control" 
-                href="http://github.com/jgmdev/bluecontrol"
+                href="https://github.com/jgmdev/bluecontrol"
                 target="_blank"
             >
                 <img alt="Blue Control" src="images/logo.png" />
