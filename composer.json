@@ -1,0 +1,20 @@
+{
+    "name": "jgmdev/bluecontrol",
+    "description": "A Puente showcase application to control color temperatures using xrandr.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jefferson González",
+            "email": "jgmdev@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "jgmdev/puente": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "BlueControl\\": "src/"
+        }
+    }
+}
