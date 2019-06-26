@@ -33,7 +33,7 @@ Before installing make sure you have the following dependencies installed:
 **Dependencies**
 
 * php - interface and service that automatically changes color temperature
-* php-sqlite - store the applicaiton settings
+* php-sqlite - store the application settings
 * chromium - display the user interface
 * xorg-xrandr - change color temperature
 * wmctrl - used to check chromium status
