@@ -37,11 +37,13 @@ Before installing make sure you have the following dependencies installed:
 * chromium - display the user interface
 * xorg-xrandr - change color temperature
 * wmctrl - used to check chromium status
+* composer - to retrieve application dependancies (puente)
 
 By default the application is configured to be installed on /usr and it can
 be installed as follows:
 
 ```sh
+composer install
 make
 sudo make install
 ```
