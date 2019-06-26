@@ -60,3 +60,20 @@ for later compressing, etc...
 ```sh
 make DESTDIR=/packages/bluecontrol/tree install
 ```
+
+## Screenshots
+
+**Day**
+![day](https://raw.githubusercontent.com/jgmdev/bluecontrol/master/screenshots/day.png)
+
+**Night**
+![night](https://raw.githubusercontent.com/jgmdev/bluecontrol/master/screenshots/night.png)
+
+**Settings**
+![settings](https://raw.githubusercontent.com/jgmdev/bluecontrol/master/screenshots/settings.png)
+
+**Compact**
+![overview](https://raw.githubusercontent.com/jgmdev/bluecontrol/master/screenshots/compact.png)
+
+**Preferences**
+![preferences](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/preferences.png)
