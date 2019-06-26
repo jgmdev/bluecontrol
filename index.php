@@ -74,6 +74,12 @@ $puente->jq("div.buttons a")->click(
 
             $settings->set("automatic", "0");
 
+            if(file_exists("/usr/lib/systemd/user/bluecontrol.service"))
+            {
+                system("systemctl --user stop bluecontrol");
+                system("systemctl --user disable bluecontrol");
+            }
+
             $puente->addCode("myPopup.show();");
         }
     },
@@ -115,6 +121,20 @@ $puente->jq("div.buttons a")->mouseenter(
 $puente->jq("#menu input[type='radio']")->change(
     function(Puente $puente, $data) use($settings){
         $settings->set("automatic", $data["value"]);
+
+        if(file_exists("/usr/lib/systemd/user/bluecontrol.service"))
+        {
+            if($data["value"] == "1")
+            {
+                system("systemctl --user enable bluecontrol");
+                system("systemctl --user start bluecontrol");
+            }
+            else
+            {
+                system("systemctl --user stop bluecontrol");
+                system("systemctl --user disable bluecontrol");
+            }
+        }
     }, 
     "{"
         . "name: jq(this).attr('name'), "
