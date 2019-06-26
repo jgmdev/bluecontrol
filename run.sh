@@ -35,7 +35,7 @@ runui()
         fi
     done
 
-    php -d open_basedir='' -S localhost:$port &
+    php -d short_open_tag=on -d open_basedir='' -S localhost:$port &
 
     server=$(pgrep -n -f php)
 
