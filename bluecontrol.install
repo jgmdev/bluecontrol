@@ -1,0 +1,13 @@
+post_install() {
+    echo "----------------------------------------------------------------"
+    echo "To enable bluecontrol on your account:"
+    echo "systemctl --user enable bluecontrol"
+    echo "systemctl --user start bluecontrol"
+    echo "----------------------------------------------------------------"
+
+    xdg-icon-resource forceupdate
+}
+
+post_remove() {
+    xdg-icon-resource forceupdate
+}

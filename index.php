@@ -17,9 +17,10 @@ use BlueControl\Timezones;
 XRandR::init();
 
 $settings = new Settings("BlueControl");
+Util::setDefaults($settings);
 
 // Get/Set timezone
-$timezone = $settings->get("timezone", "UTC");
+$timezone = $settings->get("timezone");
 date_default_timezone_set($timezone);
 
 // Get current temperature
@@ -30,14 +31,13 @@ if(($value = $settings->get("current_temperature")) != "")
     XRandR::setTemperature(floatval($value));
 }
 
-// Check if automatic cycling is enabled
-$auto = $settings->get("automatic", "0");
-$auto = $auto == "" ? "0" : $auto;
+// Get automatic cycling configuration
+$auto = $settings->get("automatic");
 
 // Make the puente to handle UI events and more...
 $puente = new Puente();
 
-$puente->addCode("currentTemp = $current_temp");
+$puente->addCode("currentTemp = $current_temp;");
 
 $puente->jq("#menu input[type='radio'][value='$auto']")->prop([
     "checked" => "true"
@@ -146,6 +146,7 @@ $puente->jq("#menu select")->change(
     . "}"
 );
 
+// Seems to only work on chromium app mode
 $puente->jq("js:window")->on(
     "resize",
     function(Puente $puente, $data)
@@ -172,7 +173,8 @@ $puente->listenRequest();
 <html>
 <head>
 <title>Blue Light Control</title>
-<link rel="icon" type="image/png" href="images/logo.png" />
+<link rel="icon" type="image/svg+xml" href="images/icon.svg" />
+<link rel="icon" type="image/png" href="images/icon.png" sizes="128x128" />
 <link rel="stylesheet" type="text/css" href="css/jquery.simplepopup.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <script src="js/jquery-3.4.1.js"></script>

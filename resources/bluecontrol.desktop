@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Name=BlueControl
+GenericName=Color temperature
+GenericName[es]=Temperatura de color
+Comment=Color temperature adjustment tool
+Comment[es]=Adjustador del color de temperatura
+Exec=/usr/bin/bluecontrol ui
+Icon=bluecontrol
+Terminal=false
+Type=Application
+StartupWMClass=BlueControl
+Categories=Utility;
+Keywords=night;mode;blue;light;color;temperature;

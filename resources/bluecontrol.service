@@ -1,0 +1,12 @@
+[Unit]
+Description=Color temperature adjustment tool
+Documentation=http://github.com/jgmdev/bluecontrol
+After=display-manager.service
+
+[Service]
+ExecStart=/usr/bin/bluecontrol
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

@@ -1,3 +1,8 @@
-vendor/
-composer.lock
-README.txt
+/pkg/
+/vendor/
+/composer.lock
+/README.txt
+/bluecontrol
+/bluecontrol.desktop
+/bluecontrol.service
+*.tar.xz

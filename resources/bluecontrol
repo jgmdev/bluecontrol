@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # BlueControl launcher script.
 
-APP_PATH=$(pwd)
+APP_PATH='/usr/lib/bluecontrol'
 
 cd $APP_PATH
 
