@@ -118,6 +118,14 @@ $puente->jq("div.buttons a")->mouseenter(
     . "}"
 );
 
+$puente->jq("div.buttons a")->mouseleave(
+    function(Puente $puente, $data){
+        $puente->jq("#description")->show()
+            ->html("Current Period: ".ucfirst(Util::getDayPeriod()))
+        ;
+    }
+);
+
 $puente->jq("#menu input[type='radio']")->change(
     function(Puente $puente, $data) use($settings){
         $settings->set("automatic", $data["value"]);
@@ -329,7 +337,7 @@ $(document).ready(function(){
         </div>
 
         <div id="description">
-            Choose a Color Temperature
+            <?="Current Period: ".ucfirst(Util::getDayPeriod())?>
         </div>
 
         <div id="popup">
