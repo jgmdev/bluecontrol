@@ -12,7 +12,7 @@ you.
 ## About
 Blue Control is a PHP application that lets you control your display 
 color temperature in order to reduce eye strain at nights. It uses the
-(Puente)[https://github.com/jgmdev/puente] library and serves as a showcase
+[Puente](https://github.com/jgmdev/puente) library and serves as a showcase
 of the things that can be done with it. This application uses PHP's builtin
 webserver to serve the GUI and chromium **app** flag to show it. Also the
 application optionally makes use of systemd to register a service that 
