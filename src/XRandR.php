@@ -25,11 +25,19 @@ class XRandR
      */
     static function init()
     {
+        $return_code = 0;
+
         ob_start();
         self::$monitor = system(
             "xrandr --listactivemonitors | cut -d' ' -f6 | tail -n 1"
         );
         ob_end_clean();
+
+        if(self::$monitor == "")
+        {
+            echo "Could not get the current display information, restarting...\n";
+            exit;
+        }
     }
 
     static function getDescription(int $temperature): string
