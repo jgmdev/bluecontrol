@@ -71,17 +71,28 @@ class PHPServer
         $this->error_log = "";
 
         $this->descriptors_spec = [
-            0 => ["pipe", "r"],
-            1 => ["pipe", "w"],
-            2 => ["pipe", "w"],
+            0 => ["pipe", "r"], //STDIN
+            1 => ["pipe", "w"], //STDOUT
+            2 => ["pipe", "w"], //STDERR
         ];
     }
 
+    /**
+     * Start a new insctance of the PHP built-in server. If the given
+     * port is already in use it will increment it to the next one until
+     * an open port is found.
+     *
+     * @param string $hostname
+     * @param integer $port
+     * @param string $executable Path to php binary
+     * 
+     * @return PHPServer
+     */
     public function start(
         string $hostname="localhost", 
         int $port=8080, 
         string $executable=PHP_BINARY
-    )
+    ): self
     {
         if($this->isRunning())
             $this->stop();
@@ -116,9 +127,16 @@ class PHPServer
         }
         
         $this->proccess_id = $this->getStatus()["pid"];
+
+        return $this;
     }
 
-    public function stop()
+    /**
+     * Terminate the running instance of the web server.
+     *
+     * @return PHPServer
+     */
+    public function stop(): self
     {
         if(is_resource($this->pipes[0]))
         {
@@ -139,8 +157,15 @@ class PHPServer
         {
             proc_terminate($this->process);
         }
+
+        return $this;
     }
 
+    /**
+     * Check if the webserver is currently running.
+     *
+     * @return boolean
+     */
     public function isRunning(): bool
     {
         if($data = $this->getStatus())
@@ -151,6 +176,11 @@ class PHPServer
         return false;
     }
 
+    /**
+     * Get the status of the instance as returned by proc_get_status().
+     *
+     * @return array
+     */
     public function getStatus(): array
     {
         if(!is_resource($this->process))
@@ -180,16 +210,31 @@ class PHPServer
         return [];
     }
 
+    /**
+     * Hostname used to listen for connections.
+     *
+     * @return string
+     */
     public function getHostname(): string
     {
         return $this->hostname;
     }
 
+    /**
+     * Port used to listen for connections. Use this after calling start().
+     *
+     * @return string
+     */
     public function getPort(): int
     {
         return $this->port;
     }
 
+    /**
+     * Get the std output of the instance from the pipe or log file.
+     *
+     * @return string
+     */
     public function getOutput(): string
     {
         if($this->output_log)
@@ -198,6 +243,11 @@ class PHPServer
         return $this->readPipe(1);
     }
 
+    /**
+     * Get the std errors of the instance from the pipes or log file.
+     *
+     * @return string
+     */
     public function getErrors(): string
     {
         if($this->error_log)
@@ -206,12 +256,24 @@ class PHPServer
         return $this->readPipe(2);
     }
 
+    /**
+     * Get the instance process id.
+     *
+     * @return integer
+     */
     public function getPID(): int
     {
         return $this->proccess_id;
     }
 
-    public function setRouter($file): void
+    /**
+     * Set the php router file for the server.
+     *
+     * @param string $file
+     * 
+     * @return PHPServer
+     */
+    public function setRouter(string $file): self
     {
         if(!file_exists($file))
         {
@@ -219,9 +281,18 @@ class PHPServer
         }
 
         $this->router = $file;
+
+        return $this;
     }
 
-    public function setWorkingDir($path): void
+    /**
+     * Set the working directory path for the server.
+     *
+     * @param string $path
+     * 
+     * @return PHPServer
+     */
+    public function setWorkingDir(string $path): self
     {
         if(!is_dir($path))
         {
@@ -229,9 +300,17 @@ class PHPServer
         }
 
         $this->working_dir = $path;
+
+        return $this;
     }
 
-    public function setErrorLog(string $file): void
+    /**
+     * Use a file for std error logging.
+     *
+     * @param string $file
+     * @return PHPServer
+     */
+    public function setErrorLog(string $file): self
     {
         if(!file_exists($file))
         {
@@ -249,8 +328,16 @@ class PHPServer
 
         $this->error_log = $file;
         $this->descriptors_spec[2] = ["file", $file, "a"];
+
+        return $this;
     }
 
+    /**
+     * Use a file for std output logging.
+     *
+     * @param string $file
+     * @return void
+     */
     public function setOutputLog(string $file): void
     {
         if(!file_exists($file))
@@ -271,6 +358,12 @@ class PHPServer
         $this->descriptors_spec[1] = ["file", $file, "a"];
     }
 
+    /**
+     * Delete log files of previously started instance, this should be 
+     * called after stop().
+     *
+     * @return void
+     */
     public function deleteLogs(): void
     {
         if(file_exists($this->output_log))
@@ -284,6 +377,14 @@ class PHPServer
         }
     }
 
+    /**
+     * Read any of the pipes from the process, 
+     * especially 1 (STDOUT) and 2 (STDERR).
+     *
+     * @param integer $number Pipe number
+     * 
+     * @return string
+     */
     private function readPipe(int $number): string
     {
         $output = "";
