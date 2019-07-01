@@ -18,11 +18,6 @@ build() {
   make
 }
 
-prepare() {
-  cd "${srcdir}/../"
-  composer install
-}
-
 package() {
   cd "${srcdir}/../"
   make DESTDIR="$pkgdir" install

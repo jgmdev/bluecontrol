@@ -1,6 +1,6 @@
-#!php -d extension=pdo_sqlite.so -d short_open_tag=on -d open_basedir='' -n
+#!/usr/bin/env -S php -d extension=pdo_sqlite.so -d short_open_tag=on -d open_basedir='' -n
 <?php
-// WORK IN PROGRESS
+chdir(__DIR__);
 
 /**
  * Handle instances of php built-in webserver.
@@ -398,12 +398,19 @@ class PHPServer
     }
 }
 
-$server = new PHPServer();
-$server->start();
+if($argv[1] == "ui")
+{
+    $server = new PHPServer();
+    $server->start();
 
-$hostname = $server->getHostname();
-$port = $server->getPort();
+    $hostname = $server->getHostname();
+    $port = $server->getPort();
 
-passthru("chromium --app=\"http://$hostname:$port\" 2>&1 > /dev/null");
+    passthru("chromium --app=\"http://$hostname:$port\" 2>&1 > /dev/null");
 
-$server->stop();
+    $server->stop();
+}
+else
+{
+    include "service.php";
+}

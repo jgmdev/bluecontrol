@@ -1,11 +1,44 @@
 DESTDIR = ""
 PREFIX = "/usr"
 
+PHP_FOUND := $(shell which php 2>/dev/null)
+WMCTRL_FOUND := $(shell which wmctrl 2>/dev/null)
+XRANDR_FOUND := $(shell which xrandr 2>/dev/null)
+CHROMIUM_FOUND := $(shell which chromium 2>/dev/null)
+COMPOSER_FOUND := $(shell which composer 2>/dev/null)
+
 .PHONY: install uninstall
 
 all:
-	@sed "s|APP_PATH='/usr/lib/bluecontrol'|APP_PATH='${PREFIX}/lib/bluecontrol'|g" \
-	resources/bluecontrol > bluecontrol
+	@if [ "$PHP_FOUND" = "" ]; then\
+		echo "Please install php (https://php.net/)";\
+		exit 1;\
+	fi
+
+	@if [ "${COMPOSER_FOUND}" = "" ]; then\
+		echo "Please install composer (https://getcomposer.org/)";\
+		exit 1;\
+	fi
+
+	@if [ "${XRANDR_FOUND}" = "" ]; then\
+		echo "Please install xrandr";\
+		exit 1;\
+	fi
+
+	@if [ "${CHROMIUM_FOUND}" = "" ]; then\
+		echo "Please install chromium";\
+		exit 1;\
+	fi
+
+	@if [ "${WMCTRL_FOUND}" = "" ]; then\
+		echo "Please install wmctrl";\
+		exit 1;\
+	fi
+
+	@composer install
+
+	@sed "s|chdir(__DIR__)|chdir('${PREFIX}/lib/bluecontrol')|g" \
+	run.php > bluecontrol
 	
 	@chmod 0755 bluecontrol
 
