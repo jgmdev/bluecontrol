@@ -37,7 +37,6 @@ Before installing make sure you have the following dependencies installed:
 * chromium - display the user interface (consumes more resources than php-webkitgtk)
 * [php-webkitgtk](https://github.com/jgmdev/php-webkitgtk) (optional) - integrated browser interface that consumes less ram
 * xorg-xrandr - change color temperature
-* wmctrl - used to check chromium status
 * composer - to retrieve application dependancies (puente)
 
 By default the application is configured to be installed on /usr and it can
