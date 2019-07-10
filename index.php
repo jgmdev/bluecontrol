@@ -200,7 +200,7 @@ $puente->listenRequest();
 ?>
 <html>
 <head>
-<title>Blue Light Control</title>
+<title>Blue Control</title>
 <link rel="icon" type="image/svg+xml" href="images/icon.svg" />
 <link rel="icon" type="image/png" href="images/icon.png" sizes="128x128" />
 <link rel="stylesheet" type="text/css" href="css/jquery.simplepopup.css">

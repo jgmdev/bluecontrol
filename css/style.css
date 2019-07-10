@@ -4,7 +4,7 @@ body {
     margin: 0;
     background: #333 url(../images/logo.png) no-repeat center center;
     background-size: contain;
-    animation: enlarge 30s infinite;
+    /*animation: enlarge 30s infinite;*/
 }
 
 body * {
@@ -12,11 +12,11 @@ body * {
     box-sizing: border-box;
 }
 
-@keyframes enlarge {
+/*@keyframes enlarge {
     0% {background-size: 25%}
     50% {background-size: 50%}
     100% {background-size: 25%}
-}
+}*/
 
 #background {
     background-color: rgba(51, 51, 51, 0.5);

@@ -1,5 +1,6 @@
-#!/usr/bin/env -S php -d extension=pdo_sqlite.so -d short_open_tag=on -d open_basedir='' -n
+#!/usr/bin/env -S php -d extension=webkitgtk.so -d extension=pdo_sqlite.so -d short_open_tag=on -d open_basedir='' -n
 <?php
+
 chdir(__DIR__);
 
 /**
@@ -406,7 +407,18 @@ if($argv[1] == "ui")
     $hostname = $server->getHostname();
     $port = $server->getPort();
 
-    passthru("chromium --app=\"http://$hostname:$port\" 2>&1 > /dev/null");
+    if(class_exists("\\WebKitGtk\\WebView"))
+    {
+        $view = new WebKitGtk\WebView("Blue Control");
+        $view->loadURI("http://$hostname:$port");
+        $view->resize(1200, 760);
+        $view->setIcon("images/icon.svg");
+        $view->show();
+    }
+    else
+    {
+        passthru("chromium --app=\"http://$hostname:$port\" 2>&1 > /dev/null");
+    }
 
     $server->stop();
 }
