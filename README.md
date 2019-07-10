@@ -34,7 +34,8 @@ Before installing make sure you have the following dependencies installed:
 
 * php - interface and service that automatically changes color temperature
 * php-sqlite - store the application settings
-* chromium - display the user interface
+* chromium - display the user interface (consumes more resources than php-webkitgtk)
+* [php-webkitgtk](https://github.com/jgmdev/php-webkitgtk) (optional) - integrated browser interface that consumes less ram
 * xorg-xrandr - change color temperature
 * wmctrl - used to check chromium status
 * composer - to retrieve application dependancies (puente)
